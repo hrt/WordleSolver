@@ -1,3 +1,7 @@
 input {
 	font-family: monospace;
 }
+
+.highlight {
+	color: green;
+}
