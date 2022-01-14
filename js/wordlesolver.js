@@ -6,6 +6,7 @@ onload = function() {
         data: {
             greenLetters: '??????',
             yellowLetters: '',
+            bannedLetters: '',
         },
         methods: {
 
@@ -22,18 +23,21 @@ onload = function() {
                 for (let i = 0; i < WORDS.length; i++) {
                     let word = WORDS[i];
                     let validGuess = true;
-                    for (let j = 0; j < this.yellowLetters.length; j++){
+                    for (let j = 0; j < this.bannedLetters.length && validGuess; j++) {
+                    	if (word.includes(this.bannedLetters[j])) {
+                    		validGuess = false;
+                    	}
+                    }
+                    for (let j = 0; j < this.yellowLetters.length && validGuess; j++) {
                         let yellowLetter = this.yellowLetters[j];
                         if (!word.includes(yellowLetter)) {
                             validGuess = false;
-                            break;
                         }
                     }
-                    for (let j = 0; j < this.greenLetters.length; j++){
+                    for (let j = 0; j < this.greenLetters.length && validGuess; j++) {
                         let greenLetter = this.greenLetters[j];
                         if (greenLetter !== '?' && word[j] !== greenLetter) {
                             validGuess = false;
-                            break;
                         }
                     }
                     if (validGuess) {
