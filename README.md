@@ -1,0 +1,1 @@
+View https://hrt.github.io/WordleSolver/
