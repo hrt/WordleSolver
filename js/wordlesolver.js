@@ -30,9 +30,9 @@ onload = function() {
                         }
                     }
                     for (let j = 0; j < this.yellowLetters.length && validGuess; j++) {
-                        let yellowLetters = this.yellowLetters[j];
-                        for (let k = 0; k < yellowLetters.length && validGuess; k++) {
-                            let yellowLetter = yellowLetters[k];
+                        let yellowLettersStep = this.yellowLetters[j];
+                        for (let k = 0; k < yellowLettersStep.length && validGuess; k++) {
+                            let yellowLetter = yellowLettersStep[k];
                             if (yellowLetter === '?') {
                                 continue;
                             }
