@@ -2,34 +2,35 @@
 
 <head>
     <title>Wordle Solver</title>
-	<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="js/wordlesolver.js"></script>
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-	<div id='app'>
-		<table>
-			<tbody>
-				<tr>
-					<td>Green Letters: (? for blanks)</td>
-					<td><input v-model="greenLetters"></td>
-				</tr>
-				<tr>
-					<td>Yellow Letters: (doesn't consider position)</td>
-					<td><input v-model="yellowLetters"></td>
-				</tr>
-				<tr>
-					<td>Banned Letters:</td>
-					<td><input v-model="bannedLetters"></td>
-				</tr>
-			</tbody>
-		</table>
-		<h3>Potential guesses</h3>
-		<ul>
-			<li v-for='guess in guesses'><span class='guess' :class='guess.highlight ? "highlight" : ""'>{{ guess.word }}</span> - {{ guess.score }}</li>
-		</ul>
-	</div>
+    <div id='app'>
+        <h5>Use '?' where it isn't the colour</h5>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Green Letters:</td>
+                    <td><input v-model="greenLetters"></td>
+                </tr>
+                <tr v-for='n in yellowLetters.length'>
+                    <td>Yellow Letters Step {{n}}:</td>
+                    <td><input v-model="yellowLetters[n-1]"></td>
+                </tr>
+                <tr>
+                    <td>Banned Letters:</td>
+                    <td><input v-model="bannedLetters"></td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Potential guesses</h3>
+        <ul>
+            <li v-for='guess in guesses'><span class='guess' :class='guess.highlight ? "highlight" : ""'>{{ guess.word }}</span> - {{ guess.score }}</li>
+        </ul>
+    </div>
 </body>
 
 </html>
