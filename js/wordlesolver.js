@@ -51,6 +51,7 @@ onload = function() {
                         guesses.push({
                             'word': word,
                             'score': 0,
+                            'highlight': WORDS_OF_THE_DAY.includes(word),
                         });
                     }
                 }
