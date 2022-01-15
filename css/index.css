@@ -5,3 +5,7 @@ input {
 .highlight {
 	color: green;
 }
+
+td {
+	vertical-align: baseline;
+}
