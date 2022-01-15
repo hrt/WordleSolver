@@ -26,10 +26,35 @@
                 </tr>
             </tbody>
         </table>
-        <h3>Potential guesses</h3>
-        <ul>
-            <li v-for='guess in guesses'><span class='guess' :class='guess.highlight ? "highlight" : ""'>{{ guess.word }}</span> - {{ guess.score }}</li>
-        </ul>
+        <table>
+            <tbody>
+                <tr>
+                    <th>Solutions</th>
+                    <th>Words To Reduce Search Space</th>
+                </tr>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr v-for='solution in solutions'>
+                                    <td><span class='highlight'>{{ solution.word }}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr v-for='guess in guesses'>
+                                    <td><span>{{ guess.word }}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </body>
 
