@@ -6,7 +6,7 @@ onload = function() {
         el: '#app',
         data: {
             greenLetters: '?????',
-            yellowLetters: '',
+            yellowLetters: ['?????', '?????', '?????', '?????','?????'],
             bannedLetters: '',
         },
         methods: {
@@ -25,14 +25,23 @@ onload = function() {
                     let word = ALL_WORDS[i];
                     let validGuess = true;
                     for (let j = 0; j < this.bannedLetters.length && validGuess; j++) {
-                    	if (word.includes(this.bannedLetters[j])) {
-                    		validGuess = false;
-                    	}
+                        if (word.includes(this.bannedLetters[j])) {
+                            validGuess = false;
+                        }
                     }
                     for (let j = 0; j < this.yellowLetters.length && validGuess; j++) {
-                        let yellowLetter = this.yellowLetters[j];
-                        if (!word.includes(yellowLetter)) {
-                            validGuess = false;
+                        let yellowLetters = this.yellowLetters[j];
+                        for (let k = 0; k < yellowLetters.length && validGuess; k++) {
+                            let yellowLetter = yellowLetters[k];
+                            if (yellowLetter === '?') {
+                                continue;
+                            }
+                            if (!word.includes(yellowLetter)) {
+                                validGuess = false;
+                            }
+                            if (word[k] === yellowLetter) {
+                                validGuess = false
+                            }
                         }
                     }
                     for (let j = 0; j < this.greenLetters.length && validGuess; j++) {
@@ -42,12 +51,12 @@ onload = function() {
                         }
                     }
                     if (validGuess) {
-                    	if (SOLUTION_WORDS.includes(word)) {
-                    		// We only care about frequencies of letters that can be used for the solution
-	                        new Set(word).forEach((character) => {
-	                            characterFrequencyMap[character] += 1;
-	                        });
-                    	}
+                        if (SOLUTION_WORDS.includes(word)) {
+                            // We only care about frequencies of letters that can be used for the solution
+                            new Set(word).forEach((character) => {
+                                characterFrequencyMap[character] += 1;
+                            });
+                        }
                         guesses.push({
                             'word': word,
                             'highlight': SOLUTION_WORDS.includes(word),
@@ -58,7 +67,8 @@ onload = function() {
                 for (var i = 0; i < guesses.length; i++) {
                     let guess = guesses[i];
                     let letters = new Set(guess.word);
-                    letters = [...letters].filter(l => !this.yellowLetters.includes(l));
+                    let yellowLetters = new Set(this.yellowLetters.join(''));
+                    letters = [...letters].filter(l => !yellowLetters.has(l));
                     letters = letters.filter(l => !this.greenLetters.includes(l));
                     letters.forEach((character) => {
                         guess.score += characterFrequencyMap[character];
